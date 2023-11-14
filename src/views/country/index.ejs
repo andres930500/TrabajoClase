@@ -1,0 +1,91 @@
+<%- include('../layouts/header', { title: 'Countries list' }) -%>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-12">
+            <h1 class="alert alert-success text-center">Countries List</h1>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12">
+            <form action="/Country/Country" method="get" class="mb-3">
+                <div class="row justify-content-center align-items-center">
+                    <div class="col-md-3">
+                        <label for="filterKey" class="form-label">Filter by:</label>
+                        <select id="filterKey" name="filterKey" class="form-select">
+                            <option value="Nombre">Nombre</option>
+                            <option value="Capital">Capital</option>
+                            <option value="Presidente">Presidente</option>
+                            <option value="Edad">Edad</option>
+                            <!-- Agrega más opciones de filtro según tus atributos -->
+                        </select>
+                    </div>
+                    <div class="col-md-5">
+                        <label for="filterValue" class="form-label">Enter filter value:</label>
+                        <input class="form-control" type="text" name="filterValue" placeholder="Enter filter value">
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-primary">Apply Filter</button>
+                    </div>
+                </div>
+            </form>
+
+            <table class="table table-info table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">ID</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Capital</th>
+                        <th scope="col">Edad</th>
+                        <th scope="col">Es Independiente</th>
+                        <th scope="col">Población</th>
+                        <th scope="col">Presidente</th>
+                        <th scope="col">Continente</th>
+                        <th scope="col">Borrar</th>
+                        <th scope="col">Generar PDF</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if (Array.isArray(countries) && countries.length > 0) { %>
+                        <% countries.forEach(country => { %>
+                            <tr>
+                                <td><%= country.id %></td>
+                                <td><%= country.Nombre %></td>
+                                <td><%= country.Capital %></td>
+                                <td><%= country.Edad %></td>
+                                <td><%= country.EsIndependiente ? 'Sí' : 'No' %></td>
+                                <td><%= country.Poblacion %></td>
+                                <td><%= country.Presidente %></td>
+                                <td><%= country.Continente %></td>
+                                <td>
+                                    <form action="/Country/delete/<%= country.id %>" method="post" onsubmit="return confirm('¿Estás seguro que deseas borrar?');">
+                                        <button type="submit" class="btn btn-outline-danger btn-sm">Delete</button>
+                                    </form>
+                                </td>
+                                <td>
+                                    <a href="/Country/generate-pdf/<%= country.id %>" class="btn btn-primary btn-sm">Generate PDF</a>
+                                    <a href="/Country/update/<%= country.id %>" class="btn btn-warning btn-sm">Actualizar</a>
+                                </td>
+                            </tr>
+                        <% }); %>
+                    <% } else { %>
+                        <tr>
+                            <td colspan="10" class="text-center">No hay países disponibles.</td>
+                        </tr>
+                    <% } %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 d-grid">
+            <a href="/Country/create" class="btn btn-outline-secondary">Create Country</a>
+        </div>
+    </div>
+</div>
+
+<%- include('../layouts/footer') -%>

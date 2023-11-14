@@ -1,0 +1,32 @@
+{
+  "name": "6_modulos_buit_in",
+  "version": "1.0.0",
+  "description": "Modulos_Buit_In_Trabajo_En_Clase",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "debug": "npx nodemon  --inspect index.js"
+  },
+  "keywords": [
+    "modulos",
+    "buit",
+    "in"
+  ],
+  "author": "AndresG",
+  "license": "ISC",
+  "dependencies": {
+    "ejs": "^3.1.9",
+    "express": "^4.18.2",
+    "has-property-descriptors": "^1.0.1",
+    "joi": "^17.11.0",
+    "pdfkit": "^0.13.0",
+    "pg": "^8.11.3",
+    "pg-hstore": "^2.3.4",
+    "sequelize": "^6.34.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.1"
+  }
+}
